@@ -31,12 +31,21 @@ def preprocess_user_input(user_input):
     bag_of_words = []
 
     # tokenize the user_input
+    input_word_token = nltk.word_tokenize(user_input)
 
     # convert the user input into its root words : stemming
+    input_word_stemmed = get_stem_words(input_word_token, ignore_words)
 
     # Remove duplicacy and sort the user_input
+    input_word_sort = sorted(list(set(input_word_stemmed)))
    
     # Input data encoding : Create BOW for user_input
+    for word in words:
+        if word in input_word_sort:
+            bag_of_words.apprend(1)
+         else:
+            bag_of_words.apprend(0)
+    bag.apprend(bag_of_words)
     
     return np.array(bag)
     
@@ -55,7 +64,7 @@ def bot_response(user_input):
    predicted_class_label =  bot_class_prediction(user_input)
  
    # extract the class from the predicted_class_label
-   predicted_class = ""
+   predicted_class = classes[predicted_class_label]
 
    # now we have the predicted tag, select a random response
 
@@ -63,7 +72,7 @@ def bot_response(user_input):
     if intent['tag']==predicted_class:
        
        # choose a random bot response
-        bot_response = ""
+        bot_response = random.choice(intent['responses']
     
         return bot_response
     
