@@ -72,7 +72,7 @@ def bot_response(user_input):
     if intent['tag']==predicted_class:
        
        # choose a random bot response
-        bot_response = random.choice(intent['responses']
+        bot_response = random.choice(intent['responses'])
     
         return bot_response
     
